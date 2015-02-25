@@ -3,6 +3,7 @@ var _ = require('lodash')
 var glob = require('glob')
 var cheerio = require('cheerio')
 var Table = require('cli-table');
+var asciify = require('diacritics').remove
 
 var stats = {}
 
@@ -99,7 +100,7 @@ function triplesToEntries(triples, date) {
 
 function newEntry(date, who) {
   return _.extend({}, date, {
-    who: who,
+    who: asciify(who),
     weekday: new Date(date.year, date.month-1, date.day).toString().split(' ')[0]
   });
 }
